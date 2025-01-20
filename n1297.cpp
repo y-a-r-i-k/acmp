@@ -1,65 +1,16 @@
-/*
-Time limit exceeded	on test 14;
-*/
-
 #include <iostream>
-#include <time.h>
+#include <vector>
 
 using namespace std;
 
-long long gcd(long long a, long long b)
+vector<bool> sieve(int n)
 {
-    if (b == 0)
-        return a;
-    return gcd(b, a % b);
-}
-
-long long mul(long long a, long long b, long long m)
-{
-    if (b == 1)
-    {
-        return a;
-    }
-    if (b % 2 == 0)
-    {
-        long long t = mul(a, b / 2, m);
-        return (2 * t) % m;
-    }
-    return (mul(a, b - 1, m) + a) % m;
-}
-
-long long pows(long long a, long long b, long long m)
-{
-    if (b == 0)
-        return 1;
-    if (b % 2 == 0)
-    {
-        long long t = pows(a, b / 2, m);
-        return mul(t, t, m) % m;
-    }
-    return (mul(pows(a, b - 1, m), a, m)) % m;
-}
-
-bool ferma(int x)
-{
-    if (x == 2)
-    {
-        return true;
-    }
-    srand(time(NULL));
-    for (int i = 0; i < 100; ++i)
-    {
-        long long a = (rand() % (x - 2)) + 2;
-        if (gcd(a, x) != 1)
-        {
-            return false;
-        }
-        if (pows(a, x - 1, x) != 1)
-        {
-            return false;
-        }
-    }
-    return true;
+    vector<bool> is_prime(n + 1, true);
+    for (int i = 2; i <= n; i++)
+        if (is_prime[i])
+            for (int j = 2 * i; j <= n; j += i)
+                is_prime[j] = false;
+    return is_prime;
 }
 
 int main()
@@ -68,15 +19,17 @@ int main()
     cin >> m >> n;
 
     bool abs = true;
+    vector<bool> v = sieve(n + 1);
     for (int i = m; i <= n; ++i)
     {
-        if (ferma(i))
+        if (v[i])
         {
-            abs = false;
             cout << i << "\n";
+            abs = false;
         }
     }
-    if (abs == true)
+
+    if (abs)
     {
         cout << "Absent";
     }
