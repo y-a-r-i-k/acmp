@@ -11,8 +11,8 @@ int main()
     int N;
     input >> N;
 
-    int countH = 0; // Количество монеток с гербом (0)
-    int countT = 0; // Количество монеток с решкой (1)
+    int countH = 0;
+    int countT = 0;
 
     // Подсчет монеток
     for (int i = 0; i < N; ++i)
