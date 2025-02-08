@@ -5,6 +5,7 @@
     "iostream": "cpp",
     "algorithm": "cpp",
     "utility": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "numeric": "cpp"
   }
 }
