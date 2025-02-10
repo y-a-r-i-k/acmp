@@ -11,7 +11,7 @@ int main() {
 
     if (a * (a + 1) != 0) {
         cout << a * (a + 1) << "25";
-    }else {
+    } else {
         cout << "25";
     }
 }
