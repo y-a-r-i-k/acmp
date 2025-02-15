@@ -10,5 +10,7 @@ public class n103 {
         b = in.nextBigInteger(); 
 
         System.out.println(a.add(b));
+
+        in.close();
     }
 }
