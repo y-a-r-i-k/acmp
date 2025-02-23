@@ -1,16 +1,15 @@
 import java.util.Scanner;
 import java.math.BigInteger;
 
-public class n103 {
+public class n363 {
     public static void main(String[] args) {
-        BigInteger a, b;
-        
         Scanner in = new Scanner(System.in);
-        a = in.nextBigInteger();
-        b = in.nextBigInteger(); 
 
-        System.out.println(a.add(b));
+        BigInteger n = in.nextBigInteger();
+        BigInteger m = in.nextBigInteger();
+
+        System.out.println(n.multiply(m));
 
         in.close();
-    }
+    }    
 }
