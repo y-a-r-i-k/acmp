@@ -10,7 +10,7 @@ public class n1737 {
 
         BigInteger res = BigInteger.valueOf(1);
         for (int i = 1; i <= len; ++i) {
-            res.multiply(BigInteger.valueOf(i));
+            res = res.multiply(BigInteger.valueOf(i));
         }
 
         System.out.println(res);
