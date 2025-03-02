@@ -1,36 +1,46 @@
 #include <iostream>
+#include <fstream>
+#include <regex>
+#include <vector>
 #include <string>
-#include <iso646.h>
-
-using namespace std;
-
-bool isLt(char c)
-{
-    return c == 'A' or c == 'b' or c == 'C' or c == 'E' or c == 'H' or c == 'K' or c == 'M' or c == 'O' or c == 'P' or c == 'T' or c == 'X' or c == 'Y';
-}
-
-bool isDg(char c)
-{
-    return c == '1' or c == '2' or c == '3' or c == '4' or c == '5' or c == '6' or c == '7' or c == '8' or c == '9' or c == '0';
-}
 
 int main()
 {
-    int n;
-    cin >> n;
+    std::ifstream inputFile("INPUT.TXT");
+    std::ofstream outputFile("OUTPUT.TXT");
 
-    for (int i = 0; i < n; ++i)
+    if (!inputFile.is_open() || !outputFile.is_open())
     {
-        string s;
-        cin >> s;
+        std::cerr << "Ошибка открытия файла!" << std::endl;
+        return 1;
+    }
 
-        if (s.size() == 6 and isLt(s[0]) and isDg(s[1]) and isDg(s[2]) and isDg(s[3]) and isLt(s[4]) and isLt(s[5]))
+    int N;
+    inputFile >> N;
+    inputFile.ignore();
+
+    std::vector<std::string> numbers(N);
+    for (int i = 0; i < N; ++i)
+    {
+        std::getline(inputFile, numbers[i]);
+    }
+
+    std::regex pattern("^[ABCEHKMOPTXY]{3}[0-9]{3}[ABCEHKMOPTXY]{2}$");
+
+    for (const auto &number : numbers)
+    {
+        if (std::regex_match(number, pattern))
         {
-            cout << "Yes";
+            outputFile << "Yes" << std::endl;
         }
         else
         {
-            cout << "No";
+            outputFile << "No" << std::endl;
         }
     }
+
+    inputFile.close();
+    outputFile.close();
+
+    return 0;
 }
