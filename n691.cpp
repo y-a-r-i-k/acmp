@@ -3,44 +3,49 @@
 #include <regex>
 #include <vector>
 #include <string>
+#include <algorithm>
+#include <iso646.h>
+
+using namespace std;
+
+bool isLetter(char c)
+{
+    c += 'A' - 'a';
+    string chars = "A, B, C, E, H, K, M, O, P, T, X, Y";
+    if (find(chars.begin(), chars.end(), c) != chars.end())
+    {
+        return true;
+    }
+    return false;
+}
+
+bool isDigit(char c)
+{
+    string chars = "1234567890";
+    if (find(chars.begin(), chars.end(), c) != chars.end())
+    {
+        return true;
+    }
+    return false;
+}
 
 int main()
 {
-    std::ifstream inputFile("INPUT.TXT");
-    std::ofstream outputFile("OUTPUT.TXT");
+    int n;
+    cin >> n;
 
-    if (!inputFile.is_open() || !outputFile.is_open())
+    for (int i = 0; i < n; ++i)
     {
-        std::cerr << "Ошибка открытия файла!" << std::endl;
-        return 1;
-    }
+        string label;
+        cin >> label;
 
-    int N;
-    inputFile >> N;
-    inputFile.ignore();
-
-    std::vector<std::string> numbers(N);
-    for (int i = 0; i < N; ++i)
-    {
-        std::getline(inputFile, numbers[i]);
-    }
-
-    std::regex pattern("^[ABCEHKMOPTXY]{2}[0-9]{3}[ABCEHKMOPTXY]{2}$");
-
-    for (const auto &number : numbers)
-    {
-        if (std::regex_match(number, pattern))
+        if (isLetter(label[0]) and isDigit(label[1]) and isDigit(label[2]) and isDigit(label[3]) and isLetter(label[4]) and isLetter(label[5]))
         {
-            outputFile << "Yes" << std::endl;
+            cout << "Yes";
         }
         else
         {
-            outputFile << "No" << std::endl;
+            cout << "No";
         }
     }
-
-    inputFile.close();
-    outputFile.close();
-
-    return 0;
 }
