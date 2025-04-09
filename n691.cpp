@@ -25,7 +25,7 @@ int main()
         std::getline(inputFile, numbers[i]);
     }
 
-    std::regex pattern("^[ABCEHKMOPTXY]{3}[0-9]{3}[ABCEHKMOPTXY]{2}$");
+    std::regex pattern("^[ABCEHKMOPTXY]{2}[0-9]{3}[ABCEHKMOPTXY]{2}$");
 
     for (const auto &number : numbers)
     {
